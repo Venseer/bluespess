@@ -59,7 +59,11 @@ class Sound {
 	}
 
 	start() {
+		if(!this.client.audio_ctx)
+			return;
 		this.buffer_promise.then((buf) => {
+			if(!this.source)
+				return;
 			this.source.buffer = buf;
 			this.source.addEventListener("ended", this.ended.bind(this));
 			this.source.start();
